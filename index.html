@@ -18,6 +18,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .pixel-animation-container, .balloon-container, #main-content {
             position: absolute;
             top: 0;
@@ -29,15 +30,21 @@
             align-items: center;
             flex-direction: column;
         }
+
         .pixel-animation-container {
-            background: black;
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
         }
-        .character {
-            width: 100px;
-            height: 100px;
-            image-rendering: pixelated;
+
+        .character-image {
+            width: 150px;
+            height: auto;
+            display: none;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
+
         .dialogue-box {
             font-size: 1.5rem;
             color: white;
@@ -47,113 +54,222 @@
             border: 2px solid white;
             width: 80%;
             text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
         }
+
         .balloon-container {
             background: rgba(0, 0, 0, 0.9);
             flex-wrap: wrap;
             z-index: 500;
+            display: none;
         }
+
         .balloon {
             font-size: 2rem;
             color: white;
             position: absolute;
             opacity: 0;
-            animation: floatUp 0.5s forwards;
+            animation: fadeInUp 5s ease-out forwards, floatUp 10s linear infinite, rotateBalloon 7s ease-in-out infinite;
         }
+
+        .balloon.last {
+            animation: none;
+            font-size: 2.5rem;
+            z-index: 1000;
+        }
+
         #main-content {
             display: none;
             flex-direction: column;
             justify-content: flex-start;
             padding-top: 20px;
         }
-        @keyframes floatUp {
+
+        @keyframes fadeInUp {
             from {
-                transform: translateY(50px);
                 opacity: 0;
+                transform: translateY(100px);
             }
             to {
-                transform: translateY(-50px);
                 opacity: 1;
+                transform: translateY(-50px);
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0px);
+            }
+            to {
+                transform: translateY(-200px);
+            }
+        }
+
+        @keyframes rotateBalloon {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+
+        @keyframes pulseExpand {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Pixel Animation Section -->
     <div id="pixel-animation" class="pixel-animation-container">
-        <img src="Screenshot_20250208_201924_Duolingo.jpg" class="character" alt="Candra">
-        <div class="dialogue-box" id="pixel-text"></div>
-        <img src="Screenshot_20250208_201408_Duolingo.jpg" class="character" alt="Muthiya">
+        <img id="candra-image" class="character-image" src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/Candra.jpg" alt="Candra">
+        <img id="muthiya-image" class="character-image" src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/Muthiya.jpg" alt="Muthiya">
+        <div class="dialogue-box" id="pixel-text">Click to continue...</div>
     </div>
     
-    <div id="balloon-container" class="balloon-container hidden"></div>
+    <!-- Balloon Animation Section -->
+    <div id="balloon-container" class="balloon-container"></div>
     
+    <!-- Main Content Section -->
     <div id="main-content">
         <h1>Happy Birthday, Muthiya! 🎉</h1>
         
         <div class="video-container">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/ryaWBh8pnq4?start=435" frameborder="0" allowfullscreen></iframe>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/PkAcfOKi1KI" frameborder="0" allowfullscreen></iframe>
         </div>
         
         <div class="message">
             <p>Dear Muthiya,</p>
-            <p>[Your AI-generated love letter or heartfelt message here]</p>
-            <p>With love, Candra</p>
+            <p>
+                Happy 31st birthday, my love! I know each birthday makes you worry about getting older, 
+                but I want you to remember something: you are and always will be incredible to me. 
+                Your strength, resilience, and kindness have shaped the person you are today, and I couldn't be more proud of you.
+            </p>
+            <p>
+                Every challenge you've faced, every step you've taken, has only made you more remarkable. 
+                Soon, the distance between us will disappear, and we'll finally be together in Japan, starting a new chapter of our lives. 
+                I can't wait for that moment when you leave the stress of work behind and focus on building our dreams together.
+            </p>
+            <p>
+                You’ve already achieved so much, and there’s still so much to look forward to. 
+                You inspire me every day, and I’ll always be here to support you, laugh with you, and remind you how loved you are.
+            </p>
+            <p>
+                So, let’s make this year unforgettable, filled with new memories, adventures, and happiness. 
+                Here's to many more birthdays together!
+            </p>
+            <p>With all my love,</p>
+            <p>Candra</p>
         </div>
         
         <div class="footer">
             <p>Made with ❤️ by Candra</p>
         </div>
+
+
+            <!-- Displaying GIFs -->
+    <div class="gif-gallery">
+        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/1.gif" alt="GIF 1">
+        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/2.gif" alt="GIF 2">
+        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/3.gif" alt="GIF 3">
+        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/4.gif" alt="GIF 4">
+        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/5.gif" alt="GIF 5">
+        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/6.gif" alt="GIF 6">
+        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/7.gif" alt="GIF 7">
+    </div>
+        
     </div>
     
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const pixelText = document.getElementById("pixel-text");
-            const pixelAnimation = document.getElementById("pixel-animation");
+            const candraImage = document.getElementById("candra-image");
+            const muthiyaImage = document.getElementById("muthiya-image");
             const balloonContainer = document.getElementById("balloon-container");
+            const pixelAnimation = document.getElementById("pixel-animation");
             const mainContent = document.getElementById("main-content");
-            
+
             const dialogue = [
-                "Candra: Hey Muthiya!",
-                "Candra: Today is a special day!",
-                "Candra: Happy Birthday, Muthiya! 🎉",
-                "Muthiya: Aww, thank you Candra! 😊"
+                { speaker: "Candra", text: "Hey Muthiya!" },
+                { speaker: "Muthiya", text: "Hey, Candra... You know what day it is today, right?" },
+                { speaker: "Candra", text: "Of course! It's your 31st birthday! 🎉" },
+                { speaker: "Muthiya", text: "(sighs) Ugh, I’m getting old... I hate turning 31." },
+                { speaker: "Candra", text: "Hey now, you're as beautiful as ever. Seriously, age is just a number." },
+                { speaker: "Muthiya", text: "You always say that, but I still worry... Every birthday, it’s the same." },
+                { speaker: "Candra", text: "And every birthday, I remind you that you keep getting wiser, stronger, and more amazing." },
+                { speaker: "Muthiya", text: "(smiling a little) Hmm... I guess you’re right." },
+                { speaker: "Candra", text: "You’ll always be my pride, no matter what. I'm really looking forward to when we’re finally together." },
+                { speaker: "Muthiya", text: "Me too. It’ll be such a relief to leave work behind and focus on us." },
+                { speaker: "Candra", text: "Exactly. And tonight, we’ll have a special celebration." }
             ];
-            
+
             let index = 0;
-            function typeDialogue() {
+
+            // Handle click to advance dialogue
+            pixelText.addEventListener("click", () => {
                 if (index < dialogue.length) {
-                    pixelText.innerText = dialogue[index];
+                    const line = dialogue[index];
+                    pixelText.innerText = line.text;
+
+                    // Show the appropriate character image
+                    if (line.speaker === "Candra") {
+                        candraImage.style.display = "block";
+                        muthiyaImage.style.display = "none";
+                    } else {
+                        muthiyaImage.style.display = "block";
+                        candraImage.style.display = "none";
+                    }
+
                     index++;
-                    setTimeout(typeDialogue, 1000);
                 } else {
-                    setTimeout(() => {
-                        pixelAnimation.style.display = "none";
-                        balloonContainer.style.display = "flex";
-                        startBalloonAnimation();
-                    }, 1000);
+                    // When dialogue ends, hide dialogue and start balloon animation
+                    pixelAnimation.style.display = "none";
+                    startBalloonAnimation();
                 }
-            }
-            
+            });
+
             function startBalloonAnimation() {
-                const totalTime = 10000; // 10 seconds
-                const intervalTime = totalTime / 31; // Time per balloon appearance
+                balloonContainer.style.display = "flex";
+
                 for (let i = 1; i <= 31; i++) {
                     setTimeout(() => {
                         const balloon = document.createElement("div");
                         balloon.classList.add("balloon");
+                        if (i === 31) balloon.classList.add("last");
                         balloon.textContent = i;
                         balloon.style.left = `${Math.random() * 80 + 10}%`;
                         balloon.style.top = `${Math.random() * 80 + 10}%`;
                         balloonContainer.appendChild(balloon);
-                    }, i * intervalTime);
+
+                        // Special effect for the last balloon
+                        if (i === 31) {
+                            setTimeout(() => {
+                                balloon.style.animation = "pulseExpand 3s ease-out forwards";
+                            }, 1000);
+                        }
+                    }, i * 200);
                 }
+
                 setTimeout(() => {
                     balloonContainer.style.display = "none";
                     mainContent.style.display = "flex";
-                }, totalTime);
+                }, 18000);
             }
-            
-            typeDialogue();
+
+            // Start the dialogue system
+            pixelText.click();  // Trigger the first line of dialogue
         });
     </script>
 </body>
