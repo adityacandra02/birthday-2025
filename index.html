@@ -75,8 +75,20 @@
 
         .balloon.last {
             animation: none;
-            font-size: 2.5rem;
+            font-size: 4rem;
             z-index: 1000;
+            animation: expandBalloon 3s ease-out forwards;
+        }
+
+        @keyframes expandBalloon {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(3);
+                opacity: 0.5;
+            }
         }
 
         #main-content {
@@ -91,12 +103,24 @@
             font-weight: bold;
             color: #fff;
             position: absolute;
-            bottom: -100px;
-            width: 100%;
-            text-align: center;
-            animation: scrollUp 5s ease-in-out forwards;
+            animation: appearBig 5s ease-out forwards;
             display: none;
             z-index: 600;
+        }
+
+        @keyframes appearBig {
+            0% {
+                transform: scale(1);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(3);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(5);
+                opacity: 0;
+            }
         }
 
         .gift-container {
@@ -159,15 +183,6 @@
                 transform: rotate(5deg);
             }
         }
-
-        @keyframes scrollUp {
-            0% {
-                bottom: -100px;
-            }
-            100% {
-                bottom: 100vh;
-            }
-        }
     </style>
 </head>
 <body>
@@ -181,49 +196,40 @@
     <!-- Balloon Animation Section -->
     <div id="balloon-container" class="balloon-container"></div>
 
-    <!-- Star Wars-style Scroll Text -->
+    <!-- Text Animation -->
     <div id="scroll-text" class="scroll-text">ムティヤ、誕生日おめでとうございます！</div>
 
     <!-- Main Content Section -->
     <div id="main-content">
-        <h1>Stay Young, Muthiya! 🎉</h1>
+        <h1>Happy Birthday, Muthiya! 🎉</h1>
 
         <div class="video-container">
             <iframe width="100%" height="315" src="https://www.youtube.com/embed/PkAcfOKi1KI" frameborder="0" allowfullscreen></iframe>
         </div>
-  <div class="message">
+          <div class="message">
             <p>Dear Muthiya,</p>
             <p>
-                Happy 31st birthday, Bebe! I know each birthday makes you worry about getting older, 
+                Happy 31st birthday, my love! I know each birthday makes you worry about getting older, 
                 but I want you to remember something: you are and always will be incredible to me. 
             </p>
          </div>
-       
- 
-        
-    </div>
+         <div class="footer">
+            <p>Made with ❤️ by Candra</p>
+        </div>
 
         <!-- Gift Reveal Section -->
         <div class="gift-container">
             <div id="gift-box" class="gift-box">🎁</div>
-            <div id="coupon" class="coupon">Unlimited eating Sushiro 🍣🍣🍣 - <br>Note: valid during birthday only. <br> - Candra</div>
+            <div id="coupon" class="coupon">Unlimited Eating Sushiro - <br>Note: valid during birthday only. <br> - Candra</div>
         </div>
+
+
+        
     </div>
-
-    
-
-               <!-- Displaying GIFs -->
-    <div class="gif-gallery">
-        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/1.gif" alt="GIF 1">
-        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/2.gif" alt="GIF 2">
-        <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/3.gif" alt="GIF 3">
-      
-    </div>
-
     
 
     <!-- Audio element for the MP3 file -->
-    <audio id="birthday-audio" src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/otanjoubi%20omedetou.mp3"></audio>
+    <audio id="birthday-audio" src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/otanjoubi%20omedetou.mp3" loop></audio>
     
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -241,7 +247,7 @@
             const dialogue = [
                 { speaker: "Candra", text: "Hey Muthiya!" },
                 { speaker: "Muthiya", text: "Hey, Candra... You know what day it is today, right?" },
-                { speaker: "Candra", text: "Of course! It's your 31st birthday! 🎉" },
+                { speaker: "Candra", text: "Of course! It's your 32nd birthday! 🎉" },
                 { speaker: "Muthiya", text: "(sighs) Ugh, I’m getting old... I hate turning 31." },
                 { speaker: "Candra", text: "Hey now, you're as beautiful as ever. Seriously, age is just a number." },
                 { speaker: "Muthiya", text: "You always say that, but I still worry... Every birthday, it’s the same." },
@@ -249,7 +255,7 @@
                 { speaker: "Muthiya", text: "(smiling a little) Hmm... I guess you’re right." },
                 { speaker: "Candra", text: "You’ll always be my pride, no matter what. I'm really looking forward to when we’re finally together." },
                 { speaker: "Muthiya", text: "Me too. It’ll be such a relief to leave work behind and focus on us." },
-                { speaker: "Candra", text: "Exactly. And tonight, we’ll have a special celebration in 🍣 Sushiro 🍣." }
+                { speaker: "Candra", text: "Exactly. And tonight, we’ll have a special celebration." }
             ];
 
             let index = 0;
@@ -280,7 +286,7 @@
             function startBalloonAnimation() {
                 balloonContainer.style.display = "flex";
 
-                for (let i = 1; i <= 31; i++) {
+                for (let i = 1; i <= 32; i++) {
                     setTimeout(() => {
                         const balloon = document.createElement("div");
                         balloon.classList.add("balloon");
@@ -291,9 +297,9 @@
                         balloonContainer.appendChild(balloon);
 
                         // Special effect for the last balloon
-                        if (i === 31) {
+                        if (i === 32) {
                             setTimeout(() => {
-                                balloon.style.animation = "pulseExpand 3s ease-out forwards";
+                                balloon.style.animation = "expandBalloon 3s ease-out forwards";
                             }, 1000);
                         }
                     }, i * 200);
