@@ -86,6 +86,51 @@
             padding-top: 20px;
         }
 
+        .scroll-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            position: absolute;
+            bottom: -100px;
+            width: 100%;
+            text-align: center;
+            animation: scrollUp 5s ease-in-out forwards;
+            display: none;
+            z-index: 600;
+        }
+
+        .gift-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .gift-box {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #f39c12, #d35400);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+        }
+
+        .coupon {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -115,18 +160,12 @@
             }
         }
 
-        @keyframes pulseExpand {
+        @keyframes scrollUp {
             0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.5);
-                opacity: 0.8;
+                bottom: -100px;
             }
             100% {
-                transform: scale(2);
-                opacity: 0;
+                bottom: 100vh;
             }
         }
     </style>
@@ -141,36 +180,50 @@
     
     <!-- Balloon Animation Section -->
     <div id="balloon-container" class="balloon-container"></div>
-    
+
+    <!-- Star Wars-style Scroll Text -->
+    <div id="scroll-text" class="scroll-text">ムティヤ、誕生日おめでとうございます！</div>
+
     <!-- Main Content Section -->
     <div id="main-content">
-        <h1>Stay young, Muthiya! 🎉</h1>
-        
+        <h1>Stay Young, Muthiya! 🎉</h1>
+
         <div class="video-container">
             <iframe width="100%" height="315" src="https://www.youtube.com/embed/PkAcfOKi1KI" frameborder="0" allowfullscreen></iframe>
         </div>
-        
-        <div class="message">
+  <div class="message">
             <p>Dear Muthiya,</p>
             <p>
-                Happy 31st birthday, my love! I know each birthday makes you worry about getting older, 
+                Happy 31st birthday, Bebe! I know each birthday makes you worry about getting older, 
                 but I want you to remember something: you are and always will be incredible to me. 
             </p>
          </div>
-         <div class="footer">
-            <p>Made with ❤️ by Candra</p>
+       
+ 
+        
+    </div>
+
+        <!-- Gift Reveal Section -->
+        <div class="gift-container">
+            <div id="gift-box" class="gift-box">🎁</div>
+            <div id="coupon" class="coupon">Unlimited eating Sushiro 🍣🍣🍣 - <br>Note: valid during birthday only. <br> - Candra</div>
         </div>
+    </div>
 
+    
 
-            <!-- Displaying GIFs -->
+               <!-- Displaying GIFs -->
     <div class="gif-gallery">
         <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/1.gif" alt="GIF 1">
         <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/2.gif" alt="GIF 2">
         <img src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/3.gif" alt="GIF 3">
       
     </div>
-        
-    </div>
+
+    
+
+    <!-- Audio element for the MP3 file -->
+    <audio id="birthday-audio" src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/otanjoubi%20omedetou.mp3"></audio>
     
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -180,6 +233,10 @@
             const balloonContainer = document.getElementById("balloon-container");
             const pixelAnimation = document.getElementById("pixel-animation");
             const mainContent = document.getElementById("main-content");
+            const scrollText = document.getElementById("scroll-text");
+            const birthdayAudio = document.getElementById("birthday-audio");
+            const giftBox = document.getElementById("gift-box");
+            const coupon = document.getElementById("coupon");
 
             const dialogue = [
                 { speaker: "Candra", text: "Hey Muthiya!" },
@@ -192,7 +249,7 @@
                 { speaker: "Muthiya", text: "(smiling a little) Hmm... I guess you’re right." },
                 { speaker: "Candra", text: "You’ll always be my pride, no matter what. I'm really looking forward to when we’re finally together." },
                 { speaker: "Muthiya", text: "Me too. It’ll be such a relief to leave work behind and focus on us." },
-                { speaker: "Candra", text: "Exactly. And tonight, we’ll have a special celebration." }
+                { speaker: "Candra", text: "Exactly. And tonight, we’ll have a special celebration in 🍣 Sushiro 🍣." }
             ];
 
             let index = 0;
@@ -244,9 +301,28 @@
 
                 setTimeout(() => {
                     balloonContainer.style.display = "none";
-                    mainContent.style.display = "flex";
+                    showScrollText();
                 }, 18000);
             }
+
+            function showScrollText() {
+                scrollText.style.display = "block";
+                setTimeout(() => {
+                    scrollText.style.display = "none";
+                    showMainContent();
+                }, 5000);
+            }
+
+            function showMainContent() {
+                mainContent.style.display = "flex";
+                birthdayAudio.play();
+            }
+
+            // Handle gift box click
+            giftBox.addEventListener("click", () => {
+                giftBox.style.display = "none";
+                coupon.style.display = "block";
+            });
 
             // Start the dialogue system
             pixelText.click();  // Trigger the first line of dialogue
