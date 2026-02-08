@@ -656,7 +656,7 @@
 
             // ✅ EDIT THIS DATE if you want (format: YYYY-MM-DDTHH:mm:ss+09:00)
             // Example: April 1, 2026 at 09:00 JST
-            const REUNION_DATE = "2026-04-01T09:00:00+09:00";
+            const REUNION_DATE = "2026-03-18T09:00:00+09:00";
 
             const cdDays = document.getElementById("cd-days");
             const cdHours = document.getElementById("cd-hours");
@@ -705,11 +705,11 @@
             function startBalloonAnimation() {
                 balloonContainer.style.display = "flex";
 
-                for (let i = 1; i <= 32; i++) {
+                for (let i = 1; i <= 33; i++) {
                     setTimeout(() => {
                         const balloon = document.createElement("div");
                         balloon.classList.add("balloon");
-                        if (i === 32) balloon.classList.add("last");
+                        if (i === 33) balloon.classList.add("last");
                         balloon.textContent = i;
                         balloon.style.left = `${Math.random() * 80 + 10}%`;
                         balloon.style.top = `${Math.random() * 80 + 10}%`;
