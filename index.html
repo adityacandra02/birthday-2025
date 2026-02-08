@@ -3,16 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Happy Birthday, Muthiya!</title>
+
+    <!-- =========================
+         Open Graph / Sharing Preview
+         ========================= -->
+    <meta name="description" content="Happy Birthday, Muthiya! A small page made with love by Candra. ❤️">
+
+    <link rel="canonical" href="https://tanjoubi-omedetou-muthiya.netlify.app/">
+    <meta property="og:title" content="Happy Birthday, Muthiya! 🎂❤️">
+    <meta property="og:description" content="A small page made with love by Candra. Tap to open the surprise.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tanjoubi-omedetou-muthiya.netlify.app/">
+
+    <!-- Best practice: host OG image on the same domain.
+         Add /og-image.jpg to your repo root (1200x630). -->
+    <meta property="og:image" content="https://tanjoubi-omedetou-muthiya.netlify.app/og-image.jpg">
+    <meta property="og:image:secure_url" content="https://tanjoubi-omedetou-muthiya.netlify.app/og-image.jpg">
+    <meta property="og:image:alt" content="Happy Birthday, Muthiya!">
+
+    <!-- Fallback (in case og-image.jpg is not yet added) -->
+    <meta property="og:image" content="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/Muthiya.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Happy Birthday, Muthiya! 🎂❤️">
+    <meta name="twitter:description" content="A small page made with love by Candra. Tap to open the surprise.">
+    <meta name="twitter:image" content="https://tanjoubi-omedetou-muthiya.netlify.app/og-image.jpg">
+
+    <meta name="theme-color" content="#000000">
+
     <style>
+        :root{
+            --bg1:#000000;
+            --bg2:#333333;
+            --card: rgba(0,0,0,0.55);
+            --card2: rgba(255,255,255,0.08);
+            --border: rgba(255,255,255,0.18);
+            --glow: rgba(255,255,255,0.25);
+            --accent: #f39c12;
+            --accent2:#d35400;
+        }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background: linear-gradient(45deg, #000000, #333333);
+            background: linear-gradient(45deg, var(--bg1), var(--bg2));
             color: #fff;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: hidden; /* locked during intro */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -56,6 +96,7 @@
             text-align: center;
             margin-bottom: 20px;
             cursor: pointer;
+            user-select: none;
         }
 
         .balloon-container {
@@ -81,22 +122,19 @@
         }
 
         @keyframes expandBalloon {
-            from {
-                transform: scale(1);
-                opacity: 1;
-            }
-            to {
-                transform: scale(3);
-                opacity: 0.5;
-            }
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(3); opacity: 0.5; }
         }
 
         #main-content {
             display: none;
-            flex-direction: column;
             justify-content: flex-start;
-            padding-top: 20px;
+            padding: 20px 16px 40px;
+            overflow-y: auto; /* allow scroll when content is tall */
         }
+
+        /* When main content is shown, we unlock scrolling */
+        body.main-shown { overflow: hidden; } /* main-content handles scrolling */
 
         .scroll-text {
             font-size: 2rem;
@@ -106,34 +144,120 @@
             animation: appearBig 5s ease-out forwards;
             display: none;
             z-index: 600;
+            padding: 0 12px;
         }
 
         @keyframes appearBig {
-            0% {
-                transform: scale(1);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(3);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(5);
-                opacity: 0;
-            }
+            0% { transform: scale(1); opacity: 0; }
+            50% { transform: scale(3); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
         }
 
+        /* ===== Main Layout ===== */
+        .page {
+            width: min(980px, 92vw);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .hero {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px 16px;
+            box-shadow: 0 0 18px rgba(0,0,0,0.6);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+            letter-spacing: 0.5px;
+        }
+
+        .sub {
+            margin: 0;
+            opacity: 0.9;
+            line-height: 1.5;
+            font-size: 1.05rem;
+        }
+
+        .video-container{
+            width: min(640px, 92vw);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 18px rgba(0,0,0,0.55);
+            background: rgba(0,0,0,0.35);
+        }
+
+        .video-container iframe{
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            height: auto;
+            border: 0;
+            display:block;
+        }
+
+        .section {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 0 14px rgba(0,0,0,0.45);
+        }
+
+        .section h2{
+            margin: 0 0 10px;
+            font-size: 1.25rem;
+            letter-spacing: 0.3px;
+        }
+
+        .message p{
+            margin: 10px 0;
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        /* ===== Music Control (helps autoplay restrictions) ===== */
+        .music-row{
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+            justify-content:center;
+            align-items:center;
+            margin-top: 8px;
+        }
+
+        .btn{
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 999px;
+            cursor:pointer;
+            transition: transform .15s ease, background .15s ease;
+            user-select:none;
+        }
+        .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.12); }
+        .btn:active{ transform: translateY(0px) scale(0.98); }
+
+        /* ===== Gift ===== */
         .gift-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 8px;
+            gap: 12px;
         }
 
         .gift-box {
             width: 120px;
             height: 120px;
-            background: linear-gradient(45deg, #f39c12, #d35400);
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
             border-radius: 12px;
             display: flex;
             justify-content: center;
@@ -142,49 +266,193 @@
             color: white;
             cursor: pointer;
             box-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+            transition: transform .2s ease;
         }
+        .gift-box:hover{ transform: translateY(-2px) rotate(-1deg); }
 
         .coupon {
             display: none;
-            margin-top: 20px;
-            font-size: 1.5rem;
+            margin-top: 4px;
+            font-size: 1.15rem;
             color: #fff;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.55);
+            padding: 14px;
             border-radius: 12px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+            line-height: 1.5;
+        }
+
+        /* =========================
+           PREMIUM FEATURE 1: Timeline
+           ========================= */
+        .timeline {
+            position: relative;
+            margin: 10px auto 0;
+            padding-left: 18px;
+            max-width: 820px;
+        }
+        .timeline:before{
+            content:"";
+            position:absolute;
+            left: 8px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: rgba(255,255,255,0.18);
+        }
+        .tl-item{
+            position:relative;
+            text-align:left;
+            padding: 12px 12px 12px 18px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .55s ease, transform .55s ease;
+        }
+        .tl-item.visible{ opacity: 1; transform: translateY(0); }
+        .tl-item:before{
+            content:"";
+            position:absolute;
+            left: -2px;
+            top: 18px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(243,156,18,0.9);
+            box-shadow: 0 0 10px rgba(243,156,18,0.35);
+        }
+        .tl-year{
+            font-weight: bold;
+            opacity: .95;
+            margin-bottom: 4px;
+        }
+        .tl-text{
+            margin:0;
+            opacity: .92;
+            line-height: 1.55;
+        }
+
+        /* =========================
+           PREMIUM FEATURE 2: Open-When Letters
+           ========================= */
+        .letters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .letter {
+            position: relative;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.06);
+            padding: 14px;
+            cursor: pointer;
+            transition: transform .18s ease, background .18s ease;
+            overflow: hidden;
+            user-select:none;
+        }
+        .letter:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.09); }
+
+        .letter .topline{
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            gap: 8px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        .seal{
+            font-size: 1.2rem;
+            opacity: .9;
+        }
+        .letter .hint{
+            margin: 8px 0 0;
+            opacity: .85;
+            font-size: .95rem;
+            line-height: 1.45;
+        }
+        .letter .content{
+            margin-top: 10px;
+            display:none;
+            text-align:left;
+            border-top: 1px dashed rgba(255,255,255,0.18);
+            padding-top: 10px;
+            line-height: 1.55;
+            opacity: .95;
+        }
+        .letter.open .content{ display:block; }
+        .letter.open .seal{ filter: drop-shadow(0 0 10px rgba(255,255,255,0.25)); }
+
+        /* =========================
+           PREMIUM FEATURE 3: Reunion Countdown
+           ========================= */
+        .countdown-wrap{
+            display:flex;
+            flex-direction:column;
+            gap: 10px;
+            align-items:center;
+            margin-top: 8px;
+        }
+        .countdown-grid{
+            display:grid;
+            grid-template-columns: repeat(4, minmax(70px, 1fr));
+            gap: 10px;
+            width: min(520px, 92vw);
+        }
+        .cd-card{
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 10px 8px;
+        }
+        .cd-num{
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+        }
+        .cd-lab{
+            margin-top: 2px;
+            opacity: .85;
+            font-size: .9rem;
+        }
+        .cd-note{
+            opacity: .9;
+            line-height: 1.55;
+            margin: 0;
+            max-width: 820px;
+        }
+
+        .footer {
+            margin-top: 6px;
+            opacity: 0.85;
+            font-size: 0.95rem;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(-50px);
-            }
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(-50px); }
         }
-
         @keyframes floatUp {
-            from {
-                transform: translateY(0px);
-            }
-            to {
-                transform: translateY(-200px);
-            }
+            from { transform: translateY(0px); }
+            to { transform: translateY(-200px); }
+        }
+        @keyframes rotateBalloon {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
         }
 
-        @keyframes rotateBalloon {
-            0%, 100% {
-                transform: rotate(0deg);
-            }
-            50% {
-                transform: rotate(5deg);
-            }
+        @media (max-width: 520px){
+            .dialogue-box{ font-size: 1.1rem; }
+            .scroll-text{ font-size: 1.4rem; }
         }
     </style>
 </head>
+
 <body>
     <!-- Pixel Animation Section -->
     <div id="pixel-animation" class="pixel-animation-container">
@@ -192,7 +460,7 @@
         <img id="muthiya-image" class="character-image" src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/Muthiya.jpg" alt="Muthiya">
         <div class="dialogue-box" id="pixel-text">Click to continue...</div>
     </div>
-    
+
     <!-- Balloon Animation Section -->
     <div id="balloon-container" class="balloon-container"></div>
 
@@ -201,34 +469,169 @@
 
     <!-- Main Content Section -->
     <div id="main-content">
-        <h1>Stay young, Muthiya! 🎉</h1>
+        <div class="page">
+            <div class="hero">
+                <h1>Stay young, Muthiya! 🎉</h1>
+                <p class="sub">A tiny corner of the internet made just for you — from Candra, always. ❤️</p>
 
-        <div class="video-container">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/PkAcfOKi1KI" frameborder="0" allowfullscreen></iframe>
-        </div>
-          <div class="message">
-            <p>      
-                Happy birthday, bebe! I know each birthday makes you worry about getting older, 
-                but I want you to remember something:  </p>
-            <p> You are and always will be incredible to me. </p>
-           
-         </div>
-              <!-- Gift Reveal Section -->
-        <div class="gift-container">
-            <div id="gift-box" class="gift-box">🎁</div>
-            <div id="coupon" class="coupon">Unlimited eating at 🍣 Sushiro 🍣 - <br>Note: *ofc* valid only on your birthday. <br></div>
-        </div>
+                <div class="music-row" style="margin-top:12px;">
+                    <button class="btn" id="music-btn">▶️ Play music</button>
+                    <button class="btn" id="share-btn">🔗 Copy link</button>
+                </div>
+                <p class="sub" id="share-status" style="margin-top:10px; opacity:.85;"></p>
+            </div>
 
-           <div class="footer">
-            <p>Made with ❤️ by Candra</p>
+            <div class="video-container" aria-label="Birthday video">
+                <iframe
+                    src="https://www.youtube.com/embed/PkAcfOKi1KI"
+                    title="Birthday Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="section message">
+                <h2>For you, bebe 💌</h2>
+                <p>
+                    Happy birthday, bebe! I know each birthday makes you worry about getting older,
+                    but I want you to remember something:
+                </p>
+                <p><b>You are and always will be incredible to me.</b></p>
+            </div>
+
+            <!-- =========================
+                 PREMIUM 1: Our Story Timeline
+                 Edit the text freely
+                 ========================= -->
+            <div class="section">
+                <h2>Our story (so far) ✨</h2>
+                <div class="timeline" id="timeline">
+                    <div class="tl-item">
+                        <div class="tl-year">Year 1</div>
+                        <p class="tl-text">We started this journey — not easy, but we chose each other anyway.</p>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-year">Year 3</div>
+                        <p class="tl-text">Distance tested us… and somehow made our love sharper and stronger.</p>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-year">Year 5</div>
+                        <p class="tl-text">Still here. Still choosing you. Still proud of us.</p>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-year">Next chapter</div>
+                        <p class="tl-text">Soon we won’t count the distance — we’ll count the moments together.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================
+                 PREMIUM 2: Open-When Letters
+                 ========================= -->
+            <div class="section">
+                <h2>Open when… 💖</h2>
+                <p style="margin:0; opacity:.9;">Tap a letter. I wrote these for the days you need them.</p>
+                <div class="letters" id="letters">
+                    <div class="letter" data-letter="1">
+                        <div class="topline">
+                            <span>…you feel tired</span>
+                            <span class="seal">💌</span>
+                        </div>
+                        <p class="hint">A reminder that you don’t have to carry everything alone.</p>
+                        <div class="content">
+                            <p style="margin:0;">
+                                Bebe, when you’re tired, please remember: I’m on your side.
+                                Rest your heart. I believe in you. And I’m proud of how far you’ve come.
+                                We’ll take everything one step at a time — together.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="letter" data-letter="2">
+                        <div class="topline">
+                            <span>…you doubt yourself</span>
+                            <span class="seal">🕊️</span>
+                        </div>
+                        <p class="hint">A small truth: you are more than enough.</p>
+                        <div class="content">
+                            <p style="margin:0;">
+                                You are smart, kind, capable, and stronger than you realize.
+                                The world may be loud — but my voice is constant: you are amazing.
+                                I love you exactly as you are.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="letter" data-letter="3">
+                        <div class="topline">
+                            <span>…you miss me</span>
+                            <span class="seal">🌙</span>
+                        </div>
+                        <p class="hint">A little piece of me, whenever the distance feels heavy.</p>
+                        <div class="content">
+                            <p style="margin:0;">
+                                Close your eyes for a second. Imagine I’m holding your hand.
+                                I’m counting the days until we’re together for real.
+                                Until then — this love is still here, still warm, still yours.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================
+                 PREMIUM 3: Reunion Countdown
+                 Update the date in JS (REUNION_DATE)
+                 ========================= -->
+            <div class="section">
+                <h2>Countdown to “together” 🗓️❤️</h2>
+                <div class="countdown-wrap">
+                    <div class="countdown-grid" id="countdown">
+                        <div class="cd-card">
+                            <div class="cd-num" id="cd-days">--</div>
+                            <div class="cd-lab">Days</div>
+                        </div>
+                        <div class="cd-card">
+                            <div class="cd-num" id="cd-hours">--</div>
+                            <div class="cd-lab">Hours</div>
+                        </div>
+                        <div class="cd-card">
+                            <div class="cd-num" id="cd-mins">--</div>
+                            <div class="cd-lab">Minutes</div>
+                        </div>
+                        <div class="cd-card">
+                            <div class="cd-num" id="cd-secs">--</div>
+                            <div class="cd-lab">Seconds</div>
+                        </div>
+                    </div>
+                    <p class="cd-note" id="countdown-note">
+                        One day soon, we won’t say “goodnight” through a screen anymore.
+                        We’ll do it from the same room. And I can’t wait.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Gift Reveal Section -->
+            <div class="section">
+                <h2>One more surprise 🎁</h2>
+                <div class="gift-container">
+                    <div id="gift-box" class="gift-box" role="button" aria-label="Open gift">🎁</div>
+                    <div id="coupon" class="coupon">
+                        Unlimited eating at 🍣 Sushiro 🍣 - <br>
+                        Note: <i>*ofc*</i> valid only on your birthday. <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Made with ❤️ by Candra</p>
+            </div>
         </div>
-      
     </div>
-    
 
     <!-- Audio element for the MP3 file -->
     <audio id="birthday-audio" src="https://raw.githubusercontent.com/adityacandra02/birthday-2025/main/otanjoubi%20omedetou.mp3" loop></audio>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const pixelText = document.getElementById("pixel-text");
@@ -241,6 +644,25 @@
             const birthdayAudio = document.getElementById("birthday-audio");
             const giftBox = document.getElementById("gift-box");
             const coupon = document.getElementById("coupon");
+
+            // New UI controls
+            const musicBtn = document.getElementById("music-btn");
+            const shareBtn = document.getElementById("share-btn");
+            const shareStatus = document.getElementById("share-status");
+
+            // PREMIUM features nodes
+            const letters = document.getElementById("letters");
+            const timelineItems = document.querySelectorAll(".tl-item");
+
+            // ✅ EDIT THIS DATE if you want (format: YYYY-MM-DDTHH:mm:ss+09:00)
+            // Example: April 1, 2026 at 09:00 JST
+            const REUNION_DATE = "2026-04-01T09:00:00+09:00";
+
+            const cdDays = document.getElementById("cd-days");
+            const cdHours = document.getElementById("cd-hours");
+            const cdMins = document.getElementById("cd-mins");
+            const cdSecs = document.getElementById("cd-secs");
+            const cdNote = document.getElementById("countdown-note");
 
             const dialogue = [
                 { speaker: "Candra", text: "Hey Muthiya!" },
@@ -272,7 +694,6 @@
                         muthiyaImage.style.display = "block";
                         candraImage.style.display = "none";
                     }
-
                     index++;
                 } else {
                     // When dialogue ends, hide dialogue and start balloon animation
@@ -294,7 +715,6 @@
                         balloon.style.top = `${Math.random() * 80 + 10}%`;
                         balloonContainer.appendChild(balloon);
 
-                        // Special effect for the last balloon
                         if (i === 32) {
                             setTimeout(() => {
                                 balloon.style.animation = "expandBalloon 3s ease-out forwards";
@@ -319,17 +739,138 @@
 
             function showMainContent() {
                 mainContent.style.display = "flex";
-                birthdayAudio.play();
+                document.body.classList.add("main-shown");
+
+                // Try autoplay (may be blocked); button is provided as fallback
+                birthdayAudio.play().catch(() => {
+                    // Autoplay blocked — user can press Play
+                });
+
+                // Start premium animations
+                setupTimelineReveal();
+                startCountdown();
             }
 
-            // Handle gift box click
+            // Gift box click
             giftBox.addEventListener("click", () => {
                 giftBox.style.display = "none";
                 coupon.style.display = "block";
             });
 
-            // Start the dialogue system
-            pixelText.click();  // Trigger the first line of dialogue
+            // Music button
+            let musicOn = false;
+            musicBtn.addEventListener("click", async () => {
+                try {
+                    if (!musicOn) {
+                        await birthdayAudio.play();
+                        musicOn = true;
+                        musicBtn.textContent = "⏸️ Pause music";
+                    } else {
+                        birthdayAudio.pause();
+                        musicOn = false;
+                        musicBtn.textContent = "▶️ Play music";
+                    }
+                } catch (e) {
+                    // no-op
+                }
+            });
+
+            // Share link button
+            shareBtn.addEventListener("click", async () => {
+                const url = window.location.href;
+                try {
+                    await navigator.clipboard.writeText(url);
+                    shareStatus.textContent = "Copied! Send it to Muthiya 💖";
+                    setTimeout(() => (shareStatus.textContent = ""), 2500);
+                } catch (e) {
+                    shareStatus.textContent = "Couldn’t copy automatically. Long-press the address bar to copy.";
+                    setTimeout(() => (shareStatus.textContent = ""), 3500);
+                }
+            });
+
+            // PREMIUM 2: Open-When Letters with localStorage memory
+            letters.addEventListener("click", (e) => {
+                const card = e.target.closest(".letter");
+                if (!card) return;
+
+                card.classList.toggle("open");
+
+                const id = card.getAttribute("data-letter");
+                const key = `letter_open_${id}`;
+                const isOpen = card.classList.contains("open");
+                try { localStorage.setItem(key, isOpen ? "1" : "0"); } catch (_) {}
+            });
+
+            function restoreLetters() {
+                document.querySelectorAll(".letter").forEach((card) => {
+                    const id = card.getAttribute("data-letter");
+                    const key = `letter_open_${id}`;
+                    try {
+                        if (localStorage.getItem(key) === "1") card.classList.add("open");
+                    } catch (_) {}
+                });
+            }
+
+            // PREMIUM 1: Timeline reveal on scroll
+            function setupTimelineReveal(){
+                const obs = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) entry.target.classList.add("visible");
+                    });
+                }, { threshold: 0.15 });
+
+                timelineItems.forEach((el) => obs.observe(el));
+            }
+
+            // PREMIUM 3: Countdown
+            function startCountdown(){
+                const target = new Date(REUNION_DATE).getTime();
+                if (Number.isNaN(target)) {
+                    cdNote.textContent = "Set REUNION_DATE in the code to start the countdown ✨";
+                    return;
+                }
+
+                const tick = () => {
+                    const now = Date.now();
+                    let diff = target - now;
+
+                    if (diff <= 0) {
+                        cdDays.textContent = "0";
+                        cdHours.textContent = "0";
+                        cdMins.textContent = "0";
+                        cdSecs.textContent = "0";
+                        cdNote.textContent = "It’s time. Come here, bebe. ❤️";
+                        return;
+                    }
+
+                    const sec = Math.floor(diff / 1000);
+                    const days = Math.floor(sec / 86400);
+                    const hours = Math.floor((sec % 86400) / 3600);
+                    const mins = Math.floor((sec % 3600) / 60);
+                    const secs = sec % 60;
+
+                    cdDays.textContent = String(days);
+                    cdHours.textContent = String(hours).padStart(2, "0");
+                    cdMins.textContent = String(mins).padStart(2, "0");
+                    cdSecs.textContent = String(secs).padStart(2, "0");
+
+                    requestAnimationFrame(() => {});
+                    setTimeout(tick, 1000);
+                };
+
+                tick();
+            }
+
+            // Restore letter open states
+            restoreLetters();
+
+            // Start the dialogue system (show first line immediately)
+            // Instead of auto-clicking (which may feel odd), we render the first line safely:
+            const first = dialogue[0];
+            pixelText.innerText = first.text;
+            candraImage.style.display = "block";
+            muthiyaImage.style.display = "none";
+            index = 1;
         });
     </script>
 </body>
